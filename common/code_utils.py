@@ -1,5 +1,5 @@
 import random
-from typing import List
+from typing import List, Set
 import string
 
 from flask import current_app
@@ -7,7 +7,7 @@ from flask import current_app
 from app.models import DiscountCode
 
 
-class CodeGenerator:
+class CodesGenerator:
 
     def __init__(self, desired_amount: int):
         self._desired_amount = desired_amount
@@ -39,9 +39,9 @@ class CodeGenerator:
             return new_code
         return self._generate_code()
 
-    def generate(self) -> List[str]:
-        result = []
-        for _ in range(self._desired_amount):
+    def generate(self) -> Set[str]:
+        result = set()
+        while len(result) != self._desired_amount:
             new_code = self._generate_code()
-            result.append(new_code)
+            result.add(new_code)
         return result

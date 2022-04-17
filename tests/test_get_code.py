@@ -5,7 +5,7 @@ from flask.testing import Client
 
 from app import db
 from app.models import Brand, DiscountCode, Customer
-from common.code_utils import CodeGenerator
+from common.code_utils import CodesGenerator
 
 
 class TestGetCode:
@@ -17,7 +17,7 @@ class TestGetCode:
         db.session.add(brand)
         db.session.flush()
 
-        for code in CodeGenerator(10).generate():
+        for code in CodesGenerator(10).generate():
             new_code = DiscountCode(code=code, brand_id=brand.id)
             db.session.add(new_code)
         db.session.commit()
@@ -63,3 +63,8 @@ class TestGetCode:
         for _ in range(10):
             response = client.get(url, json={'user_id': customer_id})
         assert response.status_code == 400
+
+    def test_get_code_invalid_brand(self, client: Client):
+        url = f'/api/brand/{00000}/code'
+        response = client.get(url, json={'user_id': 1})
+        assert response.status_code == 404

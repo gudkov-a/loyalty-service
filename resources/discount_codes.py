@@ -3,7 +3,7 @@ from flask_restful import reqparse
 
 from app import db
 from app.models import Brand, DiscountCode, Customer
-from common.code_utils import CodeGenerator
+from common.code_utils import CodesGenerator
 from common.notify_utils import NotifyHandler
 
 
@@ -37,7 +37,7 @@ class CreateDiscountCode(SwaggerView):
         Brand.query.get_or_404(brand_id)
         amount = args['amount']
 
-        new_codes = CodeGenerator(amount).generate()
+        new_codes = CodesGenerator(amount).generate()
         for code in new_codes:
             discount_code = DiscountCode(code=code, brand_id=brand_id)
             db.session.add(discount_code)
