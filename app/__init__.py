@@ -8,13 +8,11 @@ from flasgger import Swagger
 from flask_marshmallow import Marshmallow
 
 from config import conf_map
-from mail import AppMail
 
 db = SQLAlchemy()
 migrate = Migrate()
 marshmallow = Marshmallow()
 swagger = Swagger()
-mail = AppMail()
 
 
 def add_routes(_api: Api, _app: Flask):
@@ -41,7 +39,6 @@ def app_factory(conf_name: str = None):
     db.init_app(app)
     migrate.init_app(app, db)
     swagger.init_app(app)
-    mail.init_app(app)
 
     api = Api()
     add_routes(api, app)
