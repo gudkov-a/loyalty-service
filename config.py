@@ -16,7 +16,7 @@ class CommonConfig:
     DEBUG = True
     SECRET_KEY = ''.join(random.choices(string.ascii_letters, k=100))
     SQLALCHEMY_MIGRATE_REPO = os.path.join(BASE_DIR, 'migrations')
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///test.sqlite')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', f'sqlite:///{BASE_DIR}/app_db.sqlite')
     SQLALCHEMY_ENGINE_OPTIONS = {"pool_pre_ping": True}
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
