@@ -18,7 +18,6 @@ class CommonConfig:
     SQLALCHEMY_MIGRATE_REPO = os.path.join(BASE_DIR, 'migrations')
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///test.sqlite')
     SQLALCHEMY_ENGINE_OPTIONS = {"pool_pre_ping": True}
-    SQLALCHEMY_POOL_RECYCLE = 3600
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     DO_NOT_TRUNCATE_AFTER_TEST_TABLES_LIST = ('alembic_version', )
